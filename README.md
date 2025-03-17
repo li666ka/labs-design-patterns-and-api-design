@@ -1,1 +1,3 @@
-# labs-design-patterns-and-api-design
+```
+docker-compose up --build  
+```

@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce API
+  version: 1.0.0
+  description: RESTful API для інтернет-магазину
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /products:
+    get:
+      summary: Отримати список усіх продуктів
+      operationId: getAllProducts
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Успішне повернення списку продуктів
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Створити новий продукт
+      operationId: createProduct
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Продукт створено успішно
+        '400':
+          description: Невірні дані запиту
+
+  /products/{id}:
+    get:
+      summary: Отримати продукт за ID
+      operationId: getProductById
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор продукту
+      responses:
+        '200':
+          description: Продукт знайдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Продукт не знайдено
+    put:
+      summary: Повністю оновити продукт за ID
+      operationId: updateProductById
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор продукту
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Продукт оновлено
+        '400':
+          description: Невірні дані запиту
+        '404':
+          description: Продукт не знайдено
+    patch:
+      summary: Частково оновити продукт за ID
+      operationId: partiallyUpdateProductById
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор продукту
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Продукт частково оновлено
+        '404':
+          description: Продукт не знайдено
+    delete:
+      summary: Видалити продукт за ID
+      operationId: deleteProductById
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор продукту
+      responses:
+        '204':
+          description: Продукт видалено
+        '404':
+          description: Продукт не знайдено
+
+  /orders:
+    get:
+      summary: Отримати список замовлень
+      operationId: getAllOrders
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: Список замовлень
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      summary: Створити нове замовлення
+      operationId: createOrder
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Замовлення створено
+        '400':
+          description: Невірні дані запиту
+
+  /orders/{id}:
+    get:
+      summary: Отримати замовлення за ID
+      operationId: getOrderById
+      tags:
+        - Orders
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор замовлення
+      responses:
+        '200':
+          description: Замовлення знайдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Замовлення не знайдено
+    patch:
+      summary: Часткове оновлення замовлення (наприклад, зміна статусу)
+      operationId: partiallyUpdateOrderById
+      tags:
+        - Orders
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Ідентифікатор замовлення
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Замовлення оновлено
+        '400':
+          description: Невірні дані запиту
+        '404':
+          description: Замовлення не знайдено
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Унікальний ідентифікатор товару
+          example: "123"
+        name:
+          type: string
+          description: Назва товару
+          example: "Smartphone X"
+        price:
+          type: number
+          description: Ціна товару
+          example: 999.99
+        description:
+          type: string
+          description: Опис товару
+          example: "Top-notch smartphone"
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Унікальний ідентифікатор замовлення
+          example: "order_001"
+        productId:
+          type: string
+          description: Ідентифікатор продукту, який замовлено
+          example: "123"
+        quantity:
+          type: integer
+          description: Кількість замовленого товару
+          example: 2
+        status:
+          type: string
+          description: Поточний статус замовлення
+          example: "pending"

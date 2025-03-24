@@ -1,4 +1,6 @@
 /node_modules
+/integrated-api
+/api/routes/integration.ts
 
 # Logs
 logs

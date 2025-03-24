@@ -44,7 +44,9 @@ const router = Router()
  */
 router.get('/', (req, res) => {
     const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -66,8 +68,10 @@ router.get('/', (req, res) => {
  *         description: Невірні дані запиту
  */
 router.post('/', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('POST')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -95,7 +99,9 @@ router.post('/', (req, res) => {
  */
 router.get('/:id', (req, res) => {
     const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -131,8 +137,10 @@ router.get('/:id', (req, res) => {
  *         description: Замовлення не знайдено
  */
 router.patch('/:id', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('PATCH')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 export default router

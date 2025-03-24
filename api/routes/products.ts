@@ -42,8 +42,10 @@ const router = Router()
  *                 $ref: '#/components/schemas/Product'
  */
 router.get('/', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('GET')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -65,8 +67,10 @@ router.get('/', (req, res) => {
  *         description: Невірні дані запиту
  */
 router.post('/', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('POST')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -93,8 +97,10 @@ router.post('/', (req, res) => {
  *         description: Продукт не знайдено
  */
 router.get('/:id', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('GET')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -125,8 +131,10 @@ router.get('/:id', (req, res) => {
  *         description: Продукт не знайдено
  */
 router.put('/:id', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('PUT')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -161,8 +169,10 @@ router.put('/:id', (req, res) => {
  *         description: Продукт не знайдено
  */
 router.patch('/:id', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('PATCH')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 /**
@@ -185,8 +195,10 @@ router.patch('/:id', (req, res) => {
  *         description: Продукт не знайдено
  */
 router.delete('/:id', (req, res) => {
-    const randomResponse = getRandomResponse()
-    res.status(randomResponse.status).json({ message: randomResponse.message })
+    const randomResponse = getRandomResponse('DELETE')
+    setTimeout(() => {
+        res.status(randomResponse.status).json({ message: randomResponse.message })
+    }, randomResponse.delay)
 });
 
 export default router;

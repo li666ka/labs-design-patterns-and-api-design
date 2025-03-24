@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './swagger'
 import productsRouter from './routes/products'
 import ordersRouter from './routes/orders'
+import integrationRouter from './routes/integration'
 import morgan from 'morgan';
 
 
@@ -20,5 +21,6 @@ app.listen(PORT, () => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use('/products', productsRouter)
 app.use('/orders', ordersRouter)
+app.use('/integration', integrationRouter)
 
 export default app;

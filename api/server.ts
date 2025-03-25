@@ -5,12 +5,17 @@ import productsRouter from './routes/products'
 import ordersRouter from './routes/orders'
 import integrationRouter from './routes/integration'
 import morgan from 'morgan';
+import cors from 'cors';
 
 
 const app = express()
 app.use(express.json())
 app.use(morgan('dev'));
-
+app.use(cors({
+    origin: ['http://localhost:3001'],
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with']
+}));
 const PORT = 3000
 
 app.listen(PORT, () => {
